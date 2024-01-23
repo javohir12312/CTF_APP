@@ -1,0 +1,132 @@
+.voice__listWhite {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 0 0 70px;
+  padding: 0;
+  list-style-type: none;
+  gap: 40px;
+
+  .voice__firstname,
+  .voice__lastname,
+  .voice__more {
+    color: #b6b6b6;
+  }
+  .voice__item {
+    background-color: #3d3d3d;
+  }
+  .voice__play {
+    color: #b6b6b6;
+  }
+}
+
+.voice__list {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 0 0 70px;
+  padding: 0;
+  list-style-type: none;
+  gap: 40px;
+
+  .voice__firstname,
+  .voice__lastname,
+  .voice__more {
+    color: #3f3f3f;
+  }
+  .voice__item {
+    border: 1px solid #3f3f3f;
+    background-color: #d9d9d9;
+  }
+  .voice__play {
+    color: #3f3f3f;
+  }
+}
+
+.voice__item {
+  width: 100%;
+  max-width: 368px;
+  position: relative;
+  border-radius: 20px;
+}
+
+.voice__voice {
+  display: none;
+}
+
+.voice__itemLink {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.voice__contentBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.voice__img {
+  width: 50%;
+  height: 350px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.voice__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+}
+
+.voice__playbox {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 49px;
+}
+
+.voice__play {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.voice__firstname,
+.voice__lastname {
+  margin: 5px 0;
+  text-align: center;
+  font-size: 22px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  width: 100%;
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.voice__more {
+  display: block;
+  font-size: 24px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.voice__pageNation {
+  display: flex;
+  justify-content: flex-end;
+}

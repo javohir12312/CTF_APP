@@ -1,0 +1,165 @@
+.wavefrom__item {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 32px 60px;
+  border-radius: 44px;
+  background: #fff;
+  box-shadow: 0px 0px 40.3px 0px rgba(0, 0, 0, 0.25);
+
+  .wavefrom__title {
+    color: #3f3f3f;
+  }
+  .wavefrom__desc {
+    color: #3f3f3f;
+  }
+  .wavefrom__minutSecond {
+    color: #3f3f3f;
+  }
+  .wavefrom__btn {
+    color: #3f3f3f;
+  }
+}
+
+.wavefrom__itemDark {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 32px 60px;
+  border-radius: 44px;
+  background: #0f0f0f;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px 0px;
+
+  .wavefrom__title {
+    color: #b8b8b8;
+  }
+  .wavefrom__desc {
+    color: #666;
+  }
+  .wavefrom__minutSecond {
+    color: #b8b8b8;
+  }
+  .wavefrom__btn {
+    color: #b8b8b8;
+  }
+}
+
+.wavefrom__audioBox {
+  width: 100%;
+}
+
+.wavefrom__controller {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.wavefrom__textContent {
+  width: 100%;
+  max-width: 900px;
+}
+
+.wavefrom__title {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.wavefrom__desc {
+  margin: 0;
+  font-size: 18px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.wavefrom__minutSecond {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+
+  & > span {
+    display: block;
+  }
+}
+
+.wavefrom__box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  background: transparent;
+}
+
+.wavefrom__btn {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.wavefrom__wave {
+  width: 100%;
+}
+
+@media only screen and (max-width: 1362px) {
+  .wavefrom__textContent {
+    max-width: 600px;
+  }
+}
+
+@media only screen and (max-width: 1062px) {
+  .wavefrom__textContent {
+    max-width: 450px;
+  }
+}
+
+@media only screen and (max-width: 907px) {
+  .wavefrom__item,
+  .wavefrom__itemDark {
+    padding: 26px 30px;
+  }
+  .wavefrom__title {
+    font-size: 24px;
+  }
+  .wavefrom__desc {
+    font-size: 16px;
+  }
+  .wavefrom__textContent {
+    max-width: 450px;
+  }
+}
+
+@media only screen and (max-width: 848px) {
+  .wavefrom__item,
+  .wavefrom__itemDark {
+    padding: 24px 35px;
+  }
+  .wavefrom__title {
+    font-size: 18px;
+  }
+  .wavefrom__desc {
+    font-size: 14px;
+  }
+  .wavefrom__minutSecond {
+    font-size: 16px;
+  }
+  .wavefrom__btn,
+  .wavefrom__btn > svg {
+    width: 60px;
+    height: 60px;
+  }
+}
