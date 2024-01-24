@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styles from "./Category.module.scss";
 import Loading from "../Loading/Loading";
-// import Waveform from "../Waveform/Waveform";
 import { useSelector } from "react-redux";
 import UserCardWrite from "../../Store/UserCard/UserCardWrite";
 import Waveform from "../Waveform/Waveform";
@@ -11,7 +10,6 @@ const Category = React.memo(() => {
   const { themeList } = useSelector((state) => state.theme);
   const { lang } = useSelector((state) => state.lang);
   const { userCard } = useSelector((state) => state.userCard);
-
   const [currentPlaying, setCurrentPlaying] = useState(null);
 
   const handlePlay = useCallback(
@@ -28,6 +26,7 @@ const Category = React.memo(() => {
   const handlePause = useCallback(() => {
     setCurrentPlaying(null);
   }, []);
+
 
   const { innerWidth: width } = window;
 
@@ -158,17 +157,17 @@ const Category = React.memo(() => {
               <source src={userCard[lang].video} />
             </video>
             <ul className={styles.category__canter}>
-              {userCard[lang].audios.map((audio) => (
-                <Waveform
-                  key={audio.id}
-                  el={audio}
-                  isPlaying={audio.id === currentPlaying}
-                  onPlay={handlePlay}
-                  onPause={handlePause}
-                  yourAudioArray={userCard[lang].audios}
-                  currentPlaying={currentPlaying}
-                />
-              ))}
+            {userCard[lang].audios.map((audio) => (
+              <Waveform
+                key={audio.id}
+                el={audio}
+                isPlaying={audio.id === currentPlaying}
+                onPlay={handlePlay}
+                onPause={handlePause}
+                yourAudioArray={userCard[lang].audios}
+                currentPlaying={currentPlaying}
+              />
+            ))}
             </ul>
           </div>
         ) : (

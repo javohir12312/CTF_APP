@@ -83,16 +83,10 @@
 }
 
 .wavefrom__minutSecond {
-  display: flex;
-  align-items: center;
   font-size: 24px;
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-
-  & > span {
-    display: block;
-  }
 }
 
 .wavefrom__box {
@@ -113,53 +107,4 @@
 
 .wavefrom__wave {
   width: 100%;
-}
-
-@media only screen and (max-width: 1362px) {
-  .wavefrom__textContent {
-    max-width: 600px;
-  }
-}
-
-@media only screen and (max-width: 1062px) {
-  .wavefrom__textContent {
-    max-width: 450px;
-  }
-}
-
-@media only screen and (max-width: 907px) {
-  .wavefrom__item,
-  .wavefrom__itemDark {
-    padding: 26px 30px;
-  }
-  .wavefrom__title {
-    font-size: 24px;
-  }
-  .wavefrom__desc {
-    font-size: 16px;
-  }
-  .wavefrom__textContent {
-    max-width: 450px;
-  }
-}
-
-@media only screen and (max-width: 848px) {
-  .wavefrom__item,
-  .wavefrom__itemDark {
-    padding: 24px 35px;
-  }
-  .wavefrom__title {
-    font-size: 18px;
-  }
-  .wavefrom__desc {
-    font-size: 14px;
-  }
-  .wavefrom__minutSecond {
-    font-size: 16px;
-  }
-  .wavefrom__btn,
-  .wavefrom__btn > svg {
-    width: 60px;
-    height: 60px;
-  }
 }

@@ -11,36 +11,24 @@ const Waveform = React.memo(
     const [waveform, setWaveform] = useState(null);
     const [duration, setDuration] = useState("0:00");
     const [process, setProcess] = useState("0:00");
-    const [waveColor, setwaveColor] = useState("#494949");
-    const [progressColor, setprogressColor] = useState("#B8B8B8");
+    const [waveColor, setWaveColor] = useState("#494949");
+    const [progressColor, setProgressColor] = useState("#B8B8B8");
+    const [clickId, setClickId] = useState(currentPlaying);
+    const [selectedAudioId, setSelectedAudioId] = useState(null);
+    const [currentAudioId, setCurrentAudioId] = useState(null);
+    const updateCurrentAudioId = (id) => setCurrentAudioId(id);
 
     useEffect(() => {
       if (!themeList) {
-        setwaveColor("#494949");
-        setprogressColor("#B8B8B8");
+        setWaveColor("#494949");
+        setProgressColor("#B8B8B8");
       } else {
-        setwaveColor("#6c6c6c");
-        setprogressColor("#3f3f3f");
+        setWaveColor("#6c6c6c");
+        setProgressColor("#3f3f3f");
       }
     }, [themeList]);
 
-    const { innerWidth: width } = window;
-
-    const [Width, setWidth] = useState(width);
-
-    const updateWidth = () => {
-      setWidth(window.innerWidth);
-    };
-
-    useEffect(() => {
-      setWidth(window.innerWidth);
-      window.addEventListener("resize", updateWidth);
-      return () => {
-        window.removeEventListener("resize", updateWidth);
-      };
-    }, []);
-
-    const initializeWaveform = useCallback(() => {
+    const initializeWaveform = () => {
       const newWaveform = WaveSurfer.create({
         container: `#waveform-${el.id}`,
         waveColor: waveColor,
@@ -58,7 +46,7 @@ const Waveform = React.memo(
           newWaveform.destroy();
         }
       };
-    }, [waveColor, progressColor, el.id, el.audio]);
+    };
 
     useEffect(() => {
       const cleanupWaveform = initializeWaveform();
@@ -66,79 +54,88 @@ const Waveform = React.memo(
       return () => {
         cleanupWaveform();
       };
-    }, [initializeWaveform]);
+    }, [el.id, el.audio, waveColor, progressColor]);
 
     useEffect(() => {
       if (isPlaying && el.id === currentPlaying) {
         setPlaying(true);
         waveform?.play();
       } else {
+        if (playing) {
+          waveform.seekTo(0);
+        }
         setPlaying(false);
         waveform?.pause();
       }
     }, [isPlaying, waveform, el.id, currentPlaying]);
 
     const handlePlay = useCallback(() => {
-      setPlaying(true);
-      onPlay(el);
-    }, [el, onPlay]);
+      if (el.id === currentPlaying && selectedAudioId && clickId) {
+        handlePause();
+      } else {
+        onPlay(el);
+        setClickId(el.id);
+      }
+    }, [el, onPlay, selectedAudioId, currentPlaying, waveform]);
 
     const handlePause = useCallback(() => {
       setPlaying(false);
+      setSelectedAudioId(null);
       onPause();
     }, [onPause]);
-
-    const [currentAudioId, setCurrentAudioId] = useState(null);
 
     useEffect(() => {
       const handleKeyDown = (event) => {
         switch (event.code) {
-          case "Space":
-            event.preventDefault();
-            if (playing && currentAudioId === el.id) {
-              handlePause();
-            } else {
-              handlePlay();
-            }
-            break;
+          // case "Space":
+          //   event.preventDefault();
+          //   if (playing && el.id === currentPlaying && selectedAudioId) {
+          //     handlePause();
+          //   } else {
+          //     handlePlay();
+          //   }
+          //   break;
           case "ArrowLeft":
-            if (playing && currentAudioId === el.id) {
+            if (playing && el.id === currentPlaying) {
               waveform.skip(-5);
             }
             break;
           case "ArrowRight":
-            if (playing && currentAudioId === el.id) {
+            if (playing && el.id === currentPlaying) {
               waveform.skip(5);
             }
             break;
-          case "ArrowUp":
-            if (playing && currentAudioId === el.id) {
-              const currentIndex = yourAudioArray.findIndex(
-                (audio) => audio.id === el.id
-              );
-              if (currentIndex > 0) {
-                const previousAudio = yourAudioArray[currentIndex - 1];
-                setProcess("0:00");
-                waveform.seekTo(0);
-                handlePause();
-                onPlay(previousAudio);
-              }
-            }
-            break;
-          case "ArrowDown":
-            if (playing && currentAudioId === el.id) {
-              const currentIndex = yourAudioArray.findIndex(
-                (audio) => audio.id === el.id
-              );
-              if (currentIndex < yourAudioArray.length - 1) {
-                const nextAudio = yourAudioArray[currentIndex + 1];
-                setProcess("0:00");
-                waveform.seekTo(0);
-                handlePause();
-                onPlay(nextAudio);
-              }
-            }
-            break;
+          // case "ArrowUp":
+          //   if (playing && el.id === currentPlaying) {
+          //     const currentIndex = yourAudioArray.findIndex(
+          //       (audio) => audio.id === el.id
+          //     );
+          //     if (currentIndex > 0) {
+          //       const previousAudio = yourAudioArray[currentIndex - 1];
+          //       setProcess("0:00");
+          //       waveform.seekTo(0);
+          //       setClickId(el.id);
+          //       setSelectedAudioId(previousAudio.id);
+          //       onPlay(previousAudio);
+          //     }
+          //   }
+          //   break;
+          // case "ArrowDown":
+          //   if (playing && el.id === currentPlaying) {
+          //     const currentIndex = yourAudioArray.findIndex(
+          //       (audio) => audio.id === el.id
+          //     );
+          //     if (currentIndex < yourAudioArray.length - 1) {
+          //       const nextAudio = yourAudioArray[currentIndex + 1];
+          //       setProcess("0:00");
+          //       waveform.seekTo(0);
+          //       setClickId(el.id);
+          //       setSelectedAudioId(nextAudio.id);
+          //       onPlay(nextAudio);
+          //     }
+          //   }
+          //   break;
+
           default:
             break;
         }
@@ -211,6 +208,7 @@ const Waveform = React.memo(
             className={
               themeList ? styles.wavefrom__item : styles.wavefrom__itemDark
             }
+            key={el.id}
           >
             <div className={styles.wavefrom__audioBox}>
               <div className={styles.wavefrom__controller}>
@@ -225,7 +223,10 @@ const Waveform = React.memo(
               <div className={styles.wavefrom__box}>
                 <div
                   className={styles.wavefrom__btn}
-                  onClick={playing ? handlePause : handlePlay}
+                  onClick={() => {
+                    handlePlay();
+                    setClickId(el.id);
+                  }}
                 >
                   {playing ? (
                     <svg
@@ -239,8 +240,8 @@ const Waveform = React.memo(
                         fillRule="evenodd"
                         clipRule="evenodd"
                         d="M256,0C114.617,0,0,114.615,0,256s114.617,256,256,256s256-114.615,256-256S397.383,0,256,0z M224,320
-c0,8.836-7.164,16-16,16h-32c-8.836,0-16-7.164-16-16V192c0-8.836,7.164-16,16-16h32c8.836,0,16,7.164,16,16V320z M352,320
-c0,8.836-7.164,16-16,16h-32c-8.836,0-16-7.164-16-16V192c0-8.836,7.164-16,16-16h32c8.836,0,16,7.164,16,16V320z"
+  c0,8.836-7.164,16-16,16h-32c-8.836,0-16-7.164-16-16V192c0-8.836,7.164-16,16-16h32c8.836,0,16,7.164,16,16V320z M352,320
+  c0,8.836-7.164,16-16,16h-32c-8.836,0-16-7.164-16-16V192c0-8.836,7.164-16,16-16h32c8.836,0,16,7.164,16,16V320z"
                         fill="currentColor"
                       />
                     </svg>
