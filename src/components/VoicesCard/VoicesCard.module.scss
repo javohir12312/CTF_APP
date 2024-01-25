@@ -111,7 +111,7 @@
   line-height: normal;
   letter-spacing: 1px;
   width: 100%;
-  max-width: 160px;
+  max-width: 90%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -129,4 +129,60 @@
 .voice__pageNation {
   display: flex;
   justify-content: flex-end;
+}
+
+@media only screen and (max-width: 819px) {
+  .voice__list,
+  .voice__listWhite {
+    gap: 20px;
+  }
+  .voice__item {
+    max-width: 290px;
+  }
+  .voice__img {
+    height: 250px;
+  }
+  .voice__playbox {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+  }
+  .voice__play > svg {
+    width: 50px;
+    height: 50px;
+  }
+  .voice__firstname,
+  .voice__lastname {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .voice__list,
+  .voice__listWhite {
+    gap: 20px;
+  }
+  .voice__item {
+    max-width: 220px;
+  }
+  .voice__img {
+    height: 250px;
+  }
+  .voice__content {
+    max-width: 50%;
+  }
+  .voice__playbox {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 15px;
+  }
+  .voice__play > svg {
+    width: 40px;
+    height: 40px;
+  }
+  .voice__firstname,
+  .voice__lastname {
+    max-width: 80%;
+    font-size: 14px;
+  }
 }
