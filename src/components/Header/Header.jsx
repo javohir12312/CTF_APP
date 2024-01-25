@@ -49,6 +49,7 @@ const Header = React.memo(() => {
 
   const handleLinkClick = () => {
     setMenuOpen(false);
+    setScroll(!scroll);
   };
 
   const handleCheckboxChange = () => {
