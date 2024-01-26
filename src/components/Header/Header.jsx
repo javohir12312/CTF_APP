@@ -438,7 +438,7 @@ const Header = React.memo(() => {
               value={value}
               onFocus={handleFocus}
               onBlur={handleBlur}
-              onChange={(evt) => setValue(evt.target.value)}
+              onChange={(evt) => setValue(evt.target.value.toLowerCase())}
             />
 
             {hasFocus ? (
