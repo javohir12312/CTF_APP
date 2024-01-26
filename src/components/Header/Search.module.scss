@@ -1,0 +1,264 @@
+.search,
+.searchDark {
+  position: absolute;
+  top: 50px;
+  right: -25%;
+  z-index: 2;
+  width: 150%;
+  max-width: 380px;
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 16px;
+  border-radius: 7px;
+}
+
+.search {
+  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  .title {
+    color: #474747;
+  }
+
+  .link {
+    border-bottom: 1.5px solid #474747;
+  }
+
+  .firstname {
+    color: #474747;
+  }
+
+  .lastname {
+    color: #474747;
+  }
+
+  .icons {
+    color: #282828;
+  }
+}
+
+.searchDark {
+  background-color: #282828;
+  box-shadow: rgba(88, 88, 162, 0.25) 0px 50px 100px -20px,
+    rgba(81, 81, 81, 0.3) 0px 30px 60px -30px,
+    rgba(18, 66, 114, 0.35) 0px -2px 6px 0px inset;
+
+  .title {
+    color: #cdcdcd;
+  }
+
+  .link {
+    border-bottom: 1.5px solid #fff;
+  }
+
+  .firstname {
+    color: #b6b6b6;
+  }
+
+  .lastname {
+    color: #b6b6b6;
+  }
+
+  .icons {
+    color: #b6b6b6;
+  }
+}
+
+.title {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 11px;
+  font-weight: medium;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid;
+}
+
+.firstname {
+  margin: 0;
+  font-size: 14px;
+  font-weight: medium;
+}
+
+.lastname {
+  width: 100%;
+  max-width: 85%;
+  margin: 0;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icons {
+  width: 20px;
+  height: 20px;
+}
+
+@media only screen and (max-width: 1411px) {
+  .search {
+    max-width: 350px;
+    right: 0;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .search {
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.search__mobileDark {
+  background: #0f0f0f;
+  box-shadow: rgba(101, 101, 101, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+  .header__searchIcon {
+    color: #666666;
+  }
+
+  .header__search {
+    color: #b6b6b6;
+    background: #3d3d3d;
+
+    &::placeholder {
+      color: #666;
+    }
+  }
+  .arrowLeft {
+    color: #cdcdcd;
+  }
+}
+
+.search__mobile {
+  background: #fff;
+  box-shadow: rgba(44, 62, 80, 0.577) 0px 15px 15px -15px;
+
+  .header__searchIcon {
+    color: #3f3f3f;
+  }
+  .header__search {
+    color: #3f3f3f;
+    background: #d9d9d9;
+
+    &::placeholder {
+      color: #3f3f3f;
+    }
+  }
+  .arrowLeft {
+    color: #282828;
+  }
+}
+
+.search__mobileDark,
+.search__mobile {
+  position: absolute;
+  top: 68px;
+  right: 0;
+  left: 0;
+  z-index: 9;
+  padding: 0 0 20px;
+  transition: all 0.2s ease;
+  display: none;
+}
+
+.search__box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.header__searchIcon {
+  position: absolute;
+  top: 11px;
+  right: 12px;
+  transition: all 0.2s ease;
+}
+
+.header__search {
+  width: 100%;
+  margin-left: auto;
+  padding: 8px 36px 8px 12px;
+  border-radius: 15px;
+  border: none;
+  transition: all 0.4s ease;
+
+  &::-webkit-search-clear-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+  }
+
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+  }
+
+  &::-ms-clear {
+    display: none;
+  }
+
+  &::-ms-reveal {
+    display: none;
+  }
+
+  &::placeholder {
+    font-size: 14px;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 1px;
+  }
+}
+
+.arrowLeft {
+  position: absolute;
+  left: -50px;
+  width: 24px;
+  height: 25px;
+  color: #cdcdcd;
+  transition: all 0.2s ease;
+}
+
+.arrowAcktive {
+  left: 0;
+}
+
+.arrowAcktive ~ .header__search {
+  width: 95%;
+}
+
+@media only screen and (max-width: 800px) {
+  .search__mobile,
+  .search__mobileDark {
+    display: block;
+    opacity: 0.95;
+  }
+
+  .search,
+  .searchDark {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    box-shadow: none;
+    background-color: transparent;
+  }
+}

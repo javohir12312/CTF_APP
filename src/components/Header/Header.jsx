@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./darkMode.scss";
 import styles from "./Header.module.scss";
+import style from "./Search.module.scss";
+import "./Mobile.css";
 import { Link } from "react-router-dom";
 import { Forimage } from "../../server/api";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -13,14 +15,40 @@ import sun from "../../assets/sun.png";
 import MenuButton from "./MenuButton";
 import Menu from "./Menu";
 import MenuItem from "./MenuItem";
+import { Empty } from "antd";
 const elBody = document.getElementById("root");
 
 const Header = React.memo(() => {
   const { logoList } = useSelector((state) => state.logo);
+  const { userList } = useSelector((state) => state.user);
   const { themeList } = useSelector((state) => state.theme);
   const { lang } = useSelector((state) => state.lang);
   const { phoneInsta } = useSelector((state) => state.phoneInsta);
   const [scroll, setScroll] = useState(false);
+  const [value, setValue] = useState([]);
+  const inputRef = useRef(null);
+  const [hasFocus, setHasFocus] = useState(false);
+
+  const filtered = userList.filter((el) =>
+    el[lang].firstname.toLowerCase().includes(value)
+  );
+
+  const handleFocus = () => {
+    const mobileSearch = document.getElementById("search");
+    mobileSearch.classList.add("openSearch");
+    setHasFocus(true);
+    setScroll(!scroll);
+  };
+
+  const handleBlur = () => {
+    setTimeout(() => {
+      setScroll(!scroll);
+      const mobileSearch = document.getElementById("search");
+      mobileSearch.classList.remove("openSearch");
+      setHasFocus(false);
+      setValue("");
+    }, 90);
+  };
 
   const dispatch = useDispatch();
 
@@ -49,7 +77,7 @@ const Header = React.memo(() => {
 
   const handleLinkClick = () => {
     setMenuOpen(false);
-    setScroll(!scroll);
+    setScroll(false);
   };
 
   const handleCheckboxChange = () => {
@@ -198,6 +226,7 @@ const Header = React.memo(() => {
                   <span className={styles.link__line}></span>
                 </Link>
               </li>
+
               <li className={styles.header__item}>
                 <div className={styles.search__box}>
                   <div className={styles.header__searchIcon}>
@@ -218,12 +247,60 @@ const Header = React.memo(() => {
                   </div>
                   <input
                     className={styles.header__search}
-                    type="text"
+                    type="search"
+                    autoComplete="off"
+                    ref={inputRef}
                     name="search"
                     placeholder={lang === "ru" ? "Поиск" : "Qidiruv"}
+                    value={value}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    onChange={(evt) => setValue(evt.target.value)}
                   />
+
+                  {hasFocus ? (
+                    <div
+                      className={themeList ? style.search : style.searchDark}
+                    >
+                      <h3 className={style.title}>
+                        {lang === "ru" ? "Полученные результаты" : "Natijalar"}
+                      </h3>
+                      {value.length !== 0 ? (
+                        filtered.map((el) => {
+                          return (
+                            <Link
+                              className={style.link}
+                              to={`/${el._id}`}
+                              key={el._id}
+                            >
+                              <p className={style.firstname}>
+                                {el[lang].firstname} {el[lang].lastname}
+                              </p>
+                              <div className={style.icons}>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 512 512"
+                                  fill="currentColor"
+                                >
+                                  <path
+                                    d="M502.6 278.6l-128 128c-12.51 12.51-32.76 12.49-45.25 0c-12.5-12.5-12.5-32.75 0-45.25L402.8 288H32C14.31 288 0 273.7 0 255.1S14.31 224 32 224h370.8l-73.38-73.38c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l128 128C515.1 245.9 515.1 266.1 502.6 278.6z"
+                                    fill="currentColor"
+                                  />
+                                </svg>
+                              </div>
+                            </Link>
+                          );
+                        })
+                      ) : (
+                        <Empty />
+                      )}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </li>
+
               <li className={styles.header__item}>
                 <label className={styles.select}>
                   <select
@@ -309,6 +386,103 @@ const Header = React.memo(() => {
           <nav>
             <Menu open={menuOpen}>{menuItems}</Menu>
           </nav>
+        </div>
+
+        <div
+          className={
+            themeList ? style.search__mobile : style.search__mobileDark
+          }
+          id="search"
+        >
+          <div className={style.search__box}>
+            <div
+              className={`${style.arrowLeft} ${
+                hasFocus ? style.arrowAcktive : ""
+              }`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="26"
+                fill="currentColor"
+              >
+                <path
+                  fill="currentColor"
+                  d="m12.885.58 2.084 2.084L4.133 13.5l10.836 10.836-2.084 2.084L2.049 15.584-.035 13.5z"
+                />
+              </svg>
+            </div>
+            <div className={style.header__searchIcon}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 25 25"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M0 10.8374C0 4.85208 4.80043 0 10.7221 0C13.5657 0 16.2929 1.1418 18.3037 3.17421C20.3145 5.20661 21.4441 7.96315 21.4441 10.8374C21.4441 16.8228 16.6437 21.6748 10.7221 21.6748C4.80043 21.6748 0 16.8228 0 10.8374ZM21.2666 19.5679L24.5154 22.1456C25.1615 22.7986 25.1615 23.8573 24.5154 24.5103C23.8694 25.1633 22.8219 25.1633 22.1758 24.5103L19.5258 21.4731C19.2753 21.2208 19.1345 20.878 19.1345 20.5205C19.1345 20.163 19.2753 19.8202 19.5258 19.5679C20.009 19.088 20.7835 19.088 21.2666 19.5679Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <input
+              className={style.header__search}
+              type="search"
+              autoComplete="off"
+              ref={inputRef}
+              name="search"
+              placeholder={lang === "ru" ? "Поиск" : "Qidiruv"}
+              value={value}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              onChange={(evt) => setValue(evt.target.value)}
+            />
+
+            {hasFocus ? (
+              <div className={themeList ? style.search : style.searchDark}>
+                <h3 className={style.title}>
+                  {lang === "ru" ? "Полученные результаты" : "Natijalar"}
+                </h3>
+                {value.length !== 0 ? (
+                  filtered.map((el) => {
+                    return (
+                      <Link
+                        className={style.link}
+                        to={`/${el._id}`}
+                        key={el._id}
+                      >
+                        <p className={style.firstname}>
+                          {el[lang].firstname} {el[lang].lastname}
+                        </p>
+                        <div className={style.icons}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                            fill="currentColor"
+                          >
+                            <path
+                              d="M502.6 278.6l-128 128c-12.51 12.51-32.76 12.49-45.25 0c-12.5-12.5-12.5-32.75 0-45.25L402.8 288H32C14.31 288 0 273.7 0 255.1S14.31 224 32 224h370.8l-73.38-73.38c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l128 128C515.1 245.9 515.1 266.1 502.6 278.6z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </div>
+                      </Link>
+                    );
+                  })
+                ) : (
+                  <Empty
+                    className="h-[80%] flex flex-col items-center justify-center"
+                    description={lang === "ru" ? "Нет данных" : "Maʼlumot yoʻq"}
+                  />
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </header>
     </>

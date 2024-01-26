@@ -1,0 +1,7 @@
+.openSearch {
+  top: 0;
+  bottom: 0;
+  z-index: 101;
+  padding: 20px 0;
+  height: 100vh;
+}

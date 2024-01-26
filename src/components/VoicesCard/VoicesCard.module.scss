@@ -186,3 +186,33 @@
     font-size: 14px;
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .voice__list,
+  .voice__listWhite {
+    gap: 15px;
+  }
+  .voice__item {
+    max-width: 180px;
+  }
+  .voice__img {
+    height: 220px;
+  }
+  .voice__content {
+    padding: 0;
+  }
+  .voice__playbox {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 15px;
+  }
+  .voice__play > svg {
+    width: 35px;
+    height: 35px;
+  }
+  .voice__firstname,
+  .voice__lastname {
+    max-width: 80%;
+    font-size: 12px;
+  }
+}

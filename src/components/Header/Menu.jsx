@@ -21,7 +21,7 @@ const Menu = (props) => {
       background: themeList ? "#fff" : "#0f0f0f",
       opacity: 0.95,
       transition: "height 0.3s ease",
-      zIndex: 4,
+      zIndex: 98,
     },
     menuList: {
       paddingTop: "3rem",

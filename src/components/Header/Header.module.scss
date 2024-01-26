@@ -152,7 +152,7 @@
 
 .header__logoLink {
   position: relative;
-  z-index: 100;
+  z-index: 99;
   display: block;
   text-decoration: none;
 }
@@ -218,6 +218,26 @@
   border-radius: 15px;
   border: none;
   transition: all 0.2s ease;
+
+  &::-webkit-search-clear-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+  }
+
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+  }
+
+  &::-ms-clear {
+    display: none;
+  }
+
+  &::-ms-reveal {
+    display: none;
+  }
 
   &::placeholder {
     font-size: 14px;
@@ -318,6 +338,7 @@ select::-ms-expand {
 }
 
 .mobile {
+  position: relative;
   display: none;
 }
 
@@ -328,6 +349,10 @@ select::-ms-expand {
 }
 
 @media only screen and (max-width: 800px) {
+  .headerWhite,
+  .header {
+    margin-bottom: 40px;
+  }
   .header__list {
     display: none;
   }
