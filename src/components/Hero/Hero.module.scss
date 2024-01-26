@@ -126,3 +126,22 @@
     display: none;
   }
 }
+
+@media only screen and (max-width: 415px) {
+  .hero__left {
+    margin: 40px auto;
+    text-align: center;
+  }
+  .hero__title {
+    font-size: 22px;
+  }
+  .hero__text {
+    font-size: 14px;
+  }
+  .hero__btn {
+    font-size: 16px;
+  }
+  .hero__image {
+    display: none;
+  }
+}

@@ -262,3 +262,30 @@
     background-color: transparent;
   }
 }
+
+@media only screen and (max-width: 550px) {
+  .arrowAcktive {
+    width: 6%;
+  }
+  .arrowAcktive ~ .header__search {
+    width: 94%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .arrowAcktive {
+    width: 8%;
+  }
+  .arrowAcktive ~ .header__search {
+    width: 92%;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .arrowAcktive {
+    width: 10%;
+  }
+  .arrowAcktive ~ .header__search {
+    width: 90%;
+  }
+}
