@@ -157,6 +157,18 @@
   display: none;
 }
 
+.copy__btn {
+  width: 100%;
+  display: block;
+  margin-top: 30px;
+  padding: 7px 25px;
+  text-align: center;
+  color: #d9d9d9;
+  cursor: pointer;
+  background-color: #424242;
+  border-radius: 10px;
+}
+
 @media only screen and (max-width: 1115px) {
   .category__firstName,
   .category__lastName {

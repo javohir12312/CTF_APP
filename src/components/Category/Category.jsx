@@ -4,6 +4,20 @@ import Loading from "../Loading/Loading";
 import { useSelector } from "react-redux";
 import UserCardWrite from "../../Store/UserCard/UserCardWrite";
 import Waveform from "../Waveform/Waveform";
+import { Modal, message } from "antd";
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TwitterShareButton,
+  XIcon,
+} from "react-share";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 const Category = React.memo(() => {
   UserCardWrite();
@@ -11,6 +25,27 @@ const Category = React.memo(() => {
   const { lang } = useSelector((state) => state.lang);
   const { userCard } = useSelector((state) => state.userCard);
   const [currentPlaying, setCurrentPlaying] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCopy, setCopy] = useState(false);
+  const shareUrl = window.location.href;
+
+  useEffect(() => {
+    if (isCopy) {
+      message.success(lang === "ru" ? "Скопировано" : "Nusxalandi");
+      setCopy(false);
+      setIsModalOpen(false);
+    }
+  }, [isCopy]);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   const handlePlay = useCallback(
     (audio) => {
@@ -26,7 +61,6 @@ const Category = React.memo(() => {
   const handlePause = useCallback(() => {
     setCurrentPlaying(null);
   }, []);
-
 
   const { innerWidth: width } = window;
 
@@ -110,7 +144,10 @@ const Category = React.memo(() => {
                           ></path>
                         </svg>
                       </button>
-                      <button className={styles.category__share}>
+                      <button
+                        className={styles.category__share}
+                        onClick={showModal}
+                      >
                         <svg
                           width={27}
                           height={27}
@@ -131,6 +168,51 @@ const Category = React.memo(() => {
                         </svg>
                       </button>
                     </div>
+                    <Modal
+                      title={lang === "ru" ? "Поделиться" : "Baham ko'ring"}
+                      open={isModalOpen}
+                      onOk={handleOk}
+                      onCancel={handleCancel}
+                      footer
+                    >
+                      <div className="w-full flex items-center justify-around my-4">
+                        <EmailShareButton url={shareUrl} onClick={handleCancel}>
+                          <EmailIcon size={52} round={true} />
+                        </EmailShareButton>
+                        <FacebookShareButton
+                          url={shareUrl}
+                          onClick={handleCancel}
+                        >
+                          <FacebookIcon size={52} round={true} />
+                        </FacebookShareButton>
+                        <LinkedinShareButton
+                          url={shareUrl}
+                          onClick={handleCancel}
+                        >
+                          <LinkedinIcon size={52} round={true} />
+                        </LinkedinShareButton>
+                        <TelegramShareButton
+                          url={shareUrl}
+                          onClick={handleCancel}
+                        >
+                          <TelegramIcon size={52} round={true} />
+                        </TelegramShareButton>
+                        <TwitterShareButton
+                          url={shareUrl}
+                          onClick={handleCancel}
+                        >
+                          <XIcon size={52} round={true} />
+                        </TwitterShareButton>
+                      </div>
+                      <CopyToClipboard
+                        text={shareUrl}
+                        onCopy={() => setCopy(true)}
+                      >
+                        <span className={styles.copy__btn}>
+                          {lang === "ru" ? "Копировать" : "Nusxalash"}
+                        </span>
+                      </CopyToClipboard>
+                    </Modal>
                   </div>
                   <p className={styles.category__description}>
                     {userCard[lang].description}
@@ -157,17 +239,17 @@ const Category = React.memo(() => {
               <source src={userCard[lang].video} />
             </video>
             <ul className={styles.category__canter}>
-            {userCard[lang].audios.map((audio) => (
-              <Waveform
-                key={audio.id}
-                el={audio}
-                isPlaying={audio.id === currentPlaying}
-                onPlay={handlePlay}
-                onPause={handlePause}
-                yourAudioArray={userCard[lang].audios}
-                currentPlaying={currentPlaying}
-              />
-            ))}
+              {userCard[lang].audios.map((audio) => (
+                <Waveform
+                  key={audio.id}
+                  el={audio}
+                  isPlaying={audio.id === currentPlaying}
+                  onPlay={handlePlay}
+                  onPause={handlePause}
+                  yourAudioArray={userCard[lang].audios}
+                  currentPlaying={currentPlaying}
+                />
+              ))}
             </ul>
           </div>
         ) : (
