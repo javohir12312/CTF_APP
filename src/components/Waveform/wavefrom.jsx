@@ -4,7 +4,7 @@ import WaveSurfer from "wavesurfer.js";
 import Loading from "../Loading/Loading";
 import { useSelector } from "react-redux";
 
-const Waveform = React.memo(
+const wavefrom = React.memo(
   ({ el, isPlaying, onPlay, onPause, yourAudioArray, currentPlaying }) => {
     const { themeList } = useSelector((state) => state.theme);
     const [waveform, setWaveform] = useState(null);
@@ -12,7 +12,6 @@ const Waveform = React.memo(
     const [process, setProcess] = useState("0:00");
     const [waveColor, setWaveColor] = useState("#494949");
     const [progressColor, setProgressColor] = useState("#B8B8B8");
-    const [clickId, setClickId] = useState();
     const [currentAudioId, setCurrentAudioId] = useState(null);
     const updateCurrentAudioId = (id) => setCurrentAudioId(id);
 
@@ -54,6 +53,14 @@ const Waveform = React.memo(
       };
     }, [el.id, el.audio, waveColor, progressColor]);
 
+    // useEffect(() => {
+    //   if (isPlaying && el.id === currentPlaying) {
+    //     waveform?.play();
+    //   } else {
+    //     waveform?.pause();
+    //   }
+    // }, [isPlaying, currentPlaying, waveform, el.id]);
+
     // const handlePlay = useCallback(() => {
     //   if (el.id === currentPlaying) {
     //     handlePause();
@@ -66,53 +73,25 @@ const Waveform = React.memo(
     //   onPause();
     // }, [onPause]);
 
-    // const handlePlay = useCallback(
-    //   (id) => {
-    //     // console.log(id);
-    //     // if (clickId !== null) {
-    //     //   console.log(clickId);
-    //     //   onPlay(clickId);
-    //     // } else {
-    //     // }
-    //     onPlay(id);
-    //   },
-    //   [onPlay, el.id]
-    // );
-
-    // const handlePlay = useCallback(
-    //   (id) => {
-    //     if (id === currentPlaying) {
-    //       onPause();
-    //     } else {
-    //       onPlay(id);
-    //     }
-    //   },
-    //   [onPlay, onPause, currentPlaying]
-    // );
+    useEffect(() => {
+      if (isPlaying) {
+        waveform?.play();
+      } else {
+        waveform?.pause();
+      }
+    }, [isPlaying, waveform]);
 
     const handlePlay = useCallback(
       (id) => {
-        if (id === currentPlaying) {
-          onPause();
-          setCurrentAudioId(null);
-        } else {
-          onPlay(id);
-        }
+        console.log(currentPlaying);
+        onPlay(id);
       },
-      [onPlay, onPause, currentPlaying]
+      [onPlay]
     );
 
     const handlePause = useCallback(() => {
       onPause();
     }, [onPause]);
-
-    useEffect(() => {
-      if (isPlaying && el.id === currentPlaying) {
-        waveform?.play();
-      } else {
-        waveform?.pause();
-      }
-    }, [isPlaying, currentPlaying, el.id, waveform]);
 
     useEffect(() => {
       const handleKeyDown = (event) => {
@@ -121,9 +100,8 @@ const Waveform = React.memo(
             event.preventDefault();
             if (isPlaying && el.id === currentPlaying) {
               handlePause();
-            }
-            if (!isPlaying && el.id === clickId) {
-              handlePlay(clickId);
+            } else {
+              handlePlay(el.id);
             }
             break;
           case "ArrowLeft":
@@ -185,7 +163,6 @@ const Waveform = React.memo(
       currentAudioId,
       el.id,
       yourAudioArray,
-      clickId,
     ]);
 
     useEffect(() => {
@@ -254,8 +231,6 @@ const Waveform = React.memo(
                 <div
                   className={styles.wavefrom__btn}
                   onClick={() => {
-                    setClickId(el.id);
-                    // console.log(el.id);
                     handlePlay(el.id);
                   }}
                 >
@@ -306,4 +281,4 @@ const Waveform = React.memo(
   }
 );
 
-export default Waveform;
+export default wavefrom;

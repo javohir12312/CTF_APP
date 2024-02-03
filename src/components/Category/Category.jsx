@@ -47,13 +47,11 @@ const Category = React.memo(() => {
     setIsModalOpen(false);
   };
 
+
+  
   const handlePlay = useCallback(
-    (audio) => {
-      if (audio.id === currentPlaying) {
-        setCurrentPlaying(null);
-      } else {
-        setCurrentPlaying(audio.id);
-      }
+    (id) => {
+      setCurrentPlaying((prevId) => (prevId === id ? null : id));
     },
     [currentPlaying]
   );
@@ -61,6 +59,8 @@ const Category = React.memo(() => {
   const handlePause = useCallback(() => {
     setCurrentPlaying(null);
   }, []);
+
+
 
   const { innerWidth: width } = window;
 
