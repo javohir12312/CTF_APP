@@ -30,11 +30,11 @@ body {
   margin: 0;
   font-family: "Jeko", "Arial", sans-serif;
   font-weight: 400;
-  background-color: #0f0f0f;
+  background-color: #212529;
 }
 
 .light {
-  background-color: #fff;
+  background-color: #fffcf2;
 }
 
 .stop {
@@ -58,7 +58,6 @@ img {
   margin: 0 auto;
   padding: 0 20px;
 }
-
 
 @keyframes appear {
   0% {

@@ -27,7 +27,7 @@ const MenuButton = (props) => {
     line: {
       height: "2px",
       width: "20px",
-      background: themeList ? "black" : "white",
+      background: themeList ? "#403D39" : "#CED4DA",
       transition: "all 0.2s ease",
     },
     lineTop: {

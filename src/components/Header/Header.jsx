@@ -1,21 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./darkMode.scss";
 import styles from "./Header.module.scss";
 import style from "./Search.module.scss";
 import "./Mobile.css";
 import { Link } from "react-router-dom";
 import { Forimage } from "../../server/api";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { useDispatch, useSelector } from "react-redux";
-import { editTheme } from "../../Store/Theme/Theme";
-import { editLang } from "../../Store/Lang/Lang";
+import { useSelector } from "react-redux";
 import Loading from "../Loading/Loading";
-import moon from "../../assets/moon.png";
-import sun from "../../assets/sun.png";
 import MenuButton from "./MenuButton";
 import Menu from "./Menu";
 import MenuItem from "./MenuItem";
 import { Empty } from "antd";
+import ThemeToggle from "./ThemeToggle";
+import LangToggle from "./LangToggle";
 const elBody = document.getElementById("root");
 
 const Header = React.memo(() => {
@@ -50,8 +47,6 @@ const Header = React.memo(() => {
     }, 90);
   };
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
     if (themeList) {
       elBody.classList.add("light");
@@ -68,6 +63,10 @@ const Header = React.memo(() => {
     }
   }, [scroll]);
 
+  useEffect(() => {
+    handleLinkClick();
+  }, [themeList, lang]);
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleMenuClick = () => {
@@ -78,16 +77,6 @@ const Header = React.memo(() => {
   const handleLinkClick = () => {
     setMenuOpen(false);
     setScroll(false);
-  };
-
-  const handleCheckboxChange = () => {
-    dispatch(editTheme(!themeList));
-    handleLinkClick();
-  };
-
-  const handleLangChange = (value) => {
-    dispatch(editLang(value));
-    handleLinkClick();
   };
 
   const menuItems = (
@@ -103,20 +92,11 @@ const Header = React.memo(() => {
         </Link>
       </li>
       <li className={styles.header__item}>
-        <label className={styles.select}>
-          <select
-            value={lang}
-            onChange={(evt) => handleLangChange(evt.target.value)}
-          >
-            <option value="ru">Ru</option>
-            <option value="uz">Uz</option>
-          </select>
-        </label>
-      </li>
-      <li className={styles.header__item}>
         {phoneInsta?.map((el) => {
           return (
             <div className={styles.header__linkList} key={el._id}>
+              <LangToggle />
+              <ThemeToggle />
               <a
                 className={styles.header__tel}
                 href={`tel:+998${el.number}`}
@@ -157,37 +137,6 @@ const Header = React.memo(() => {
             </div>
           );
         })}
-        <div className={styles.checkBoxTheme}>
-          <input
-            type="checkbox"
-            className={styles.checkbox}
-            id="checkbox"
-            checked={themeList}
-            onChange={handleCheckboxChange}
-          />
-          <label
-            htmlFor="checkbox"
-            className={`${styles.label} ${
-              themeList ? "day-mode" : "night-mode"
-            }`}
-          >
-            <img
-              className={styles.moon}
-              src={moon}
-              width={16}
-              height={16}
-              alt=""
-            />
-            <img
-              className={styles.sun}
-              src={sun}
-              width={16}
-              height={16}
-              alt=""
-            />
-            <div className={styles.ball} />
-          </label>
-        </div>
       </li>
     </MenuItem>
   );
@@ -302,42 +251,11 @@ const Header = React.memo(() => {
               </li>
 
               <li className={styles.header__item}>
-                <label className={styles.select}>
-                  <select
-                    onChange={(evt) => handleLangChange(evt.target.value)}
-                  >
-                    <option value="ru" defaultChecked>
-                      Ru
-                    </option>
-                    <option value="uz">Uz</option>
-                  </select>
-                </label>
-              </li>
-              <li className={styles.header__item}>
-                <div>
-                  <input
-                    type="checkbox"
-                    className={styles.checkbox}
-                    id="checkbox"
-                    checked={themeList}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label
-                    htmlFor="checkbox"
-                    className={`${styles.label} ${
-                      themeList ? "day-mode" : "night-mode"
-                    }`}
-                  >
-                    <i className="fas fa-moon"></i>
-                    <i className="fas fa-sun"></i>
-                    <div className={styles.ball} />
-                  </label>
-                </div>
-              </li>
-              <li className={styles.header__item}>
                 {phoneInsta?.map((el) => {
                   return (
                     <div className={styles.header__linkList} key={el._id}>
+                      <LangToggle />
+                      <ThemeToggle />
                       <a
                         className={styles.header__tel}
                         href={`tel:+998${el.number}`}
@@ -475,7 +393,15 @@ const Header = React.memo(() => {
                 ) : (
                   <Empty
                     className="h-[80%] flex flex-col items-center justify-center"
-                    description={lang === "ru" ? "Нет данных" : "Maʼlumot yoʻq"}
+                    description={
+                      <span
+                        className={
+                          themeList ? "text-[#403D39]" : "text-[#ced4da]"
+                        }
+                      >
+                        {lang === "ru" ? "Нет данных" : "Maʼlumot yoʻq"}
+                      </span>
+                    }
                   />
                 )}
               </div>
