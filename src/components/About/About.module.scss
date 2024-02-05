@@ -1,0 +1,49 @@
+.about {
+  padding: 80px 0;
+}
+
+.about__light {
+  .about__title {
+    color: #403d39;
+  }
+
+  .about__btn {
+    color: #403d39;
+    background-color: #ccc5b9;
+  }
+}
+
+.about__dark {
+  .about__title {
+    color: #ced4da;
+  }
+
+  .about__btn {
+    color: #ced4da;
+    background-color: #343a40;
+  }
+}
+
+.about__box {
+  text-align: center;
+}
+
+.about__title {
+  margin: 0 0 24px;
+  font-size: 30px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.about__btn {
+  display: inline-block;
+  padding: 6px 35px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-decoration: none;
+}

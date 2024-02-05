@@ -6,20 +6,15 @@
   margin-bottom: 40px;
   padding: 32px 60px;
   border-radius: 44px;
-  background: #fff;
-  box-shadow: 0px 0px 40.3px 0px rgba(0, 0, 0, 0.25);
+  background: #eae0d5;
 
-  .wavefrom__title {
-    color: #3f3f3f;
+  .wavefrom__title,
+  .wavefrom__minutSecond,
+  .wavefrom__btn {
+    color: #403d39;
   }
   .wavefrom__desc {
-    color: #3f3f3f;
-  }
-  .wavefrom__minutSecond {
-    color: #3f3f3f;
-  }
-  .wavefrom__btn {
-    color: #3f3f3f;
+    color: #2e2c29;
   }
 }
 
@@ -31,20 +26,15 @@
   margin-bottom: 40px;
   padding: 32px 60px;
   border-radius: 44px;
-  background: #0f0f0f;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px 0px;
+  background: #343a40;
 
-  .wavefrom__title {
-    color: #b8b8b8;
+  .wavefrom__title,
+  .wavefrom__minutSecond,
+  .wavefrom__btn {
+    color: #ced4da;
   }
   .wavefrom__desc {
-    color: #666;
-  }
-  .wavefrom__minutSecond {
-    color: #b8b8b8;
-  }
-  .wavefrom__btn {
-    color: #b8b8b8;
+    color: #b9bfc4;
   }
 }
 

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const Error = () => {
   const { errorList } = useSelector((state) => state.error);
   const { lang } = useSelector((state) => state.lang);
-  const { theme } = useSelector((state) => state.theme);
+  const { themeList } = useSelector((state) => state.theme);
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Error = () => {
 
   if (!error || !error.response || !error.response.status) {
     return (
-      <div className={theme ? styles.error : styles.errorDark}>
+      <div className={themeList ? styles.error : styles.errorDark}>
         <h2 className={styles.title}>Oops...</h2>
         <p className={styles.message}>An unexpected error occurred.</p>
         <Link to="/" className={styles.link}>
@@ -29,7 +29,7 @@ const Error = () => {
     return (
       <div
         className={`${styles.error404} ${
-          theme ? styles.error : styles.errorDark
+          themeList ? styles.error : styles.errorDark
         }`}
       >
         <h2 className={styles.title}>Oops...</h2>
@@ -42,7 +42,7 @@ const Error = () => {
     );
   } else {
     return (
-      <div className={theme ? styles.error : styles.errorDark}>
+      <div className={themeList ? styles.error : styles.errorDark}>
         <h2 className={styles.title}>Oops...</h2>
         <p className={styles.message}>{error.message}</p>
         <p className={styles.statusText}>{error.response.statusText}</p>

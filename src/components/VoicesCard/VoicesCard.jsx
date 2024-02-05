@@ -47,7 +47,7 @@ const VoicesCard = React.memo(({ check }) => {
 
   return (
     <>
-      <ul className={themeList ? styles.voice__list : styles.voice__listWhite}>
+      <ul className={themeList ? styles.voice__listWhite : styles.voice__list}>
         {userList !== undefined ? (
           getVisibleCategory().map((el, index) => {
             return (

@@ -18,11 +18,11 @@ const Waveform = React.memo(
 
     useEffect(() => {
       if (!themeList) {
-        setWaveColor("#494949");
-        setProgressColor("#B8B8B8");
+        setWaveColor("#6c757d");
+        setProgressColor("#adb5bd");
       } else {
-        setWaveColor("#6c6c6c");
-        setProgressColor("#3f3f3f");
+        setWaveColor("#403d39");
+        setProgressColor("#7e7871");
       }
     }, [themeList]);
 
@@ -32,7 +32,9 @@ const Waveform = React.memo(
         waveColor: waveColor,
         progressColor: progressColor,
         height: 60,
-        barRadius: 4,
+        barWidth: 1,
+        barGap: 1,
+        barRadius: 2,
       });
 
       newWaveform.load(el.audio);

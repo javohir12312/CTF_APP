@@ -92,6 +92,16 @@ const Header = React.memo(() => {
         </Link>
       </li>
       <li className={styles.header__item}>
+        <Link
+          className={styles.header__link}
+          to={"about"}
+          onClick={handleLinkClick}
+        >
+          {lang === "ru" ? "O нас" : "Biz haqimizda"}{" "}
+          <span className={styles.link__line}></span>
+        </Link>
+      </li>
+      <li className={styles.header__item}>
         {phoneInsta?.map((el) => {
           return (
             <div className={styles.header__linkList} key={el._id}>
@@ -172,6 +182,12 @@ const Header = React.memo(() => {
               <li className={styles.header__item}>
                 <Link className={styles.header__link} to={"voices"}>
                   {lang === "ru" ? "Голоса" : "Ovozlar"}{" "}
+                  <span className={styles.link__line}></span>
+                </Link>
+              </li>
+              <li className={styles.header__item}>
+                <Link className={styles.header__link} to={"about"}>
+                  {lang === "ru" ? "O нас" : "Biz haqimizda"}{" "}
                   <span className={styles.link__line}></span>
                 </Link>
               </li>
