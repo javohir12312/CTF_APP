@@ -5,7 +5,8 @@ import Home from "../Home/Home";
 import Error from "../Error/Error";
 import FullGet from "../../Store/FullGet";
 import Voices from "../Voices/Voices";
-import Category from '../Category/Category'
+import Category from "../Category/Category";
+import About from "../About/About";
 
 const App = () => {
   FullGet();
@@ -13,6 +14,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Main />}>
         <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
         <Route path="voices" element={<Voices />} />
         <Route path=":id" element={<Category />} />
       </Route>

@@ -18,7 +18,7 @@ const Menu = (props) => {
       width: "100vw",
       display: "flex",
       flexDirection: "column",
-      background: themeList ? "#fff" : "#0f0f0f",
+      background: themeList ? "#FFFCF2" : "#212529",
       opacity: 0.95,
       transition: "height 0.3s ease",
       zIndex: 98,

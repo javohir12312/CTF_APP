@@ -4,19 +4,14 @@
   .category__firstName,
   .category__lastName,
   .category__description {
-    color: #3f3f3f;
+    color: #403d39;
   }
 
   .category__insta,
   .category__similar,
   .category__share {
-    color: #3f3f3f;
-    background-color: #d9d9d9;
-
-    &:hover {
-      color: #3f3f3f;
-      background: radial-gradient(50% 50% at 50% 50%, #d9d9d9 0%, #b1b1b1 100%);
-    }
+    color: #403d39;
+    background-color: #ccc5b9;
   }
 }
 
@@ -25,21 +20,16 @@
 
   .category__firstName,
   .category__lastName {
-    color: #b8b8b8;
+    color: #ced4da;
   }
   .category__description {
-    color: #666;
+    color: #ced4da;
   }
   .category__insta,
   .category__similar,
   .category__share {
-    color: #666666;
-    background-color: #3d3d3d;
-
-    &:hover {
-      color: #262626;
-      background: radial-gradient(50% 50% at 50% 50%, #7a7a7a 0%, #3d3d3d 100%);
-    }
+    color: #bcc1c7;
+    background-color: #343a40;
   }
 }
 
