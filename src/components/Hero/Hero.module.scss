@@ -2,22 +2,22 @@
   position: relative;
   padding: 80px 0 50px;
 
-  // .hero__title,
-  // .hero__text,
-  // .hero__btn {
-  //   color: #ced4da;
-  // }
+  .hero__title,
+  .hero__text,
+  .hero__btn {
+    color: #ced4da;
+  }
 }
 
 .hero__section {
   position: relative;
   padding: 80px 0 50px;
 
-  // .hero__title,
-  // .hero__text,
-  // .hero__btn {
-  //   color: #403d39;
-  // }
+  .hero__title,
+  .hero__text,
+  .hero__btn {
+    color: #403d39;
+  }
 }
 
 .hero__boxTop {
@@ -56,12 +56,6 @@
   line-height: normal;
   letter-spacing: 1px;
   text-decoration: none;
-}
-
-.hero__title,
-.hero__text,
-.hero__btn {
-  color: #ced4da;
 }
 
 .hero__image {
@@ -104,6 +98,13 @@
 }
 
 @media only screen and (max-width: 596px) {
+  .hero__section {
+    .hero__title,
+    .hero__text,
+    .hero__btn {
+      color: #ced4da;
+    }
+  }
   .hero__left {
     max-width: 100%;
     text-align: center;
