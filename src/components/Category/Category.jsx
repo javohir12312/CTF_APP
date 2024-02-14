@@ -98,14 +98,10 @@ const Category = React.memo(() => {
               <div className={styles.category__content}>
                 <div>
                   <div className={styles.category__nameBox}>
-                    <div className={styles.category__nmB}>
-                      <p className={styles.category__firstName}>
-                        {userCard[lang].firstname}
-                      </p>
-                      <p className={styles.category__lastName}>
-                        {userCard[lang].lastname}
-                      </p>
-                    </div>
+                    <p className={styles.category__firstName}>
+                      <span>{userCard[lang].firstname}</span>{" "}
+                      <span>{userCard[lang].lastname}</span>
+                    </p>
                     <div className={styles.category__linkList}>
                       <a
                         className={styles.category__insta}
