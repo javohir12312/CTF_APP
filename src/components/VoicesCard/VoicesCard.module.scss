@@ -1,53 +1,18 @@
-.voice__listWhite {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  margin: 0 0 70px;
-  padding: 0;
-  list-style-type: none;
-  gap: 40px;
-
-  .voice__firstname,
-  .voice__lastname,
-  .voice__more {
-    color: #403d39;
-  }
-  .voice__item {
-    background-color: #eae0d5;
-  }
-  .voice__play {
-    color: #403d39;
-  }
-}
-
 .voice__list {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 0 0 70px;
+  margin: 0 0 40px;
   padding: 0;
   list-style-type: none;
   gap: 40px;
-
-  .voice__firstname,
-  .voice__lastname,
-  .voice__more {
-    color: #ced4da;
-  }
-  .voice__item {
-    background-color: #343a40;
-  }
-  .voice__play {
-    color: #ced4da;
-  }
 }
 
 .voice__item {
-  width: 100%;
-  max-width: 368px;
   position: relative;
+  width: 100%;
+  max-width: 260px;
   border-radius: 20px;
 }
 
@@ -56,64 +21,66 @@
 }
 
 .voice__itemLink {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.voice__contentBox {
+  display: block;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  height: 100%;
+  text-decoration: none;
+  border-radius: 15px;
 }
 
 .voice__img {
-  width: 50%;
-  height: 350px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  width: 100%;
+  height: 300px;
+  border-radius: 15px;
 }
 
 .voice__content {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
+  padding: 20px;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 100%) 0%,
+    rgba(0, 0, 0, 70%) 60%,
+    rgba(0, 0, 0, 0%) 100%
+  );
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.voice__textContent {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 12px;
-}
-
-.voice__playbox {
-  position: relative;
-  width: 60px;
-  height: 60px;
-  margin-bottom: 49px;
-}
-
-.voice__play {
-  position: absolute;
-  z-index: 2;
-  display: block;
-  border-radius: 50%;
-  cursor: pointer;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 170px;
 }
 
 .voice__firstname,
 .voice__lastname {
-  margin: 5px 0;
-  text-align: center;
-  font-size: 22px;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: 1px;
   width: 100%;
-  max-width: 90%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 20px;
+  text-align: start;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  color: #ced4da;
+}
+
+.voice__play {
+  display: block;
+  width: 40px;
+  height: 40px;
+  color: #ced4da;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .voice__more {
@@ -125,94 +92,63 @@
   text-align: center;
 }
 
+.voice__moreLight {
+  color: #403d39;
+}
+
+.voice__moreDark {
+  color: #ced4da;
+}
+
 .voice__pageNation {
   display: flex;
   justify-content: flex-end;
 }
 
-@media only screen and (max-width: 819px) {
-  .voice__list,
-  .voice__listWhite {
-    gap: 20px;
-  }
+@media only screen and (max-width: 600px) {
   .voice__item {
-    max-width: 290px;
+    max-width: 200px;
   }
   .voice__img {
-    height: 250px;
-  }
-  .voice__playbox {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 20px;
-  }
-  .voice__play > svg {
-    width: 50px;
-    height: 50px;
-  }
-  .voice__firstname,
-  .voice__lastname {
-    font-size: 16px;
-  }
-}
-
-@media only screen and (max-width: 640px) {
-  .voice__list,
-  .voice__listWhite {
-    gap: 20px;
-  }
-  .voice__item {
-    max-width: 220px;
-  }
-  .voice__img {
-    height: 250px;
+    height: 240px;
   }
   .voice__content {
-    max-width: 50%;
-    padding: 0;
+    padding: 16px 12px;
   }
-  .voice__playbox {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 15px;
-  }
-  .voice__play > svg {
-    width: 40px;
-    height: 40px;
-  }
-  .voice__firstname,
-  .voice__lastname {
-    max-width: 80%;
-    font-size: 14px;
+  .voice__textContent {
+    max-width: 130px;
   }
 }
 
 @media only screen and (max-width: 500px) {
-  .voice__list,
-  .voice__listWhite {
+  .voice__list {
     gap: 20px;
   }
+}
+
+@media only screen and (max-width: 460px) {
   .voice__item {
-    max-width: 300px;
+    max-width: 160px;
   }
   .voice__img {
-    height: 320px;
+    height: 200px;
   }
   .voice__content {
-    padding: 0;
+    padding: 14px 10px;
   }
-  .voice__playbox {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 25px;
-  }
-  .voice__play > svg {
-    width: 50px;
-    height: 50px;
+  .voice__textContent {
+    max-width: 95px;
   }
   .voice__firstname,
   .voice__lastname {
-    max-width: 80%;
     font-size: 16px;
+  }
+  .voice__play {
+    width: 35px;
+    height: 35px;
+    svg {
+      width: 35px;
+      height: 35px;
+    }
   }
 }

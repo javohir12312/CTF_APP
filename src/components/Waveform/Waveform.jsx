@@ -14,6 +14,7 @@ const Waveform = React.memo(
     const [progressColor, setProgressColor] = useState("#B8B8B8");
     const [clickId, setClickId] = useState();
     const [currentAudioId, setCurrentAudioId] = useState(null);
+    const [selectAudioId, setSelectAudioId] = useState(null);
     const updateCurrentAudioId = (id) => setCurrentAudioId(id);
 
     useEffect(() => {
@@ -56,42 +57,6 @@ const Waveform = React.memo(
       };
     }, [el.id, el.audio, waveColor, progressColor]);
 
-    // const handlePlay = useCallback(() => {
-    //   if (el.id === currentPlaying) {
-    //     handlePause();
-    //   } else {
-    //     onPlay(el);
-    //   }
-    // }, [el, onPlay, currentPlaying]);
-
-    // const handlePause = useCallback(() => {
-    //   onPause();
-    // }, [onPause]);
-
-    // const handlePlay = useCallback(
-    //   (id) => {
-    //     // console.log(id);
-    //     // if (clickId !== null) {
-    //     //   console.log(clickId);
-    //     //   onPlay(clickId);
-    //     // } else {
-    //     // }
-    //     onPlay(id);
-    //   },
-    //   [onPlay, el.id]
-    // );
-
-    // const handlePlay = useCallback(
-    //   (id) => {
-    //     if (id === currentPlaying) {
-    //       onPause();
-    //     } else {
-    //       onPlay(id);
-    //     }
-    //   },
-    //   [onPlay, onPause, currentPlaying]
-    // );
-
     const handlePlay = useCallback(
       (id) => {
         if (id === currentPlaying) {
@@ -116,6 +81,30 @@ const Waveform = React.memo(
       }
     }, [isPlaying, currentPlaying, el.id, waveform]);
 
+    const handlePreviousAudio = useCallback(() => {
+      const currentIndex = yourAudioArray.findIndex(
+        (audio) => audio.id === el.id
+      );
+      if (currentIndex > 0) {
+        const previousAudio = yourAudioArray[currentIndex - 1];
+        setProcess("0:00");
+        waveform.seekTo(0);
+        onPlay(previousAudio.id);
+      }
+    }, [yourAudioArray, el.id, onPlay, waveform]);
+
+    const handleNextAudio = useCallback(() => {
+      const currentIndex = yourAudioArray.findIndex(
+        (audio) => audio.id === el.id
+      );
+      if (currentIndex < yourAudioArray.length - 1) {
+        const nextAudio = yourAudioArray[currentIndex + 1];
+        setProcess("0:00");
+        waveform.seekTo(0);
+        onPlay(nextAudio.id);
+      }
+    }, [yourAudioArray, el.id, onPlay, waveform]);
+
     useEffect(() => {
       const handleKeyDown = (event) => {
         switch (event.code) {
@@ -138,36 +127,16 @@ const Waveform = React.memo(
               waveform.skip(5);
             }
             break;
-          // case "ArrowUp":
-          //   if (isPlaying && el.id === currentPlaying) {
-          //     const currentIndex = yourAudioArray.findIndex(
-          //       (audio) => audio.id === el.id
-          //     );
-          //     if (currentIndex > 0) {
-          //       const previousAudio = yourAudioArray[currentIndex - 1];
-          //       setProcess("0:00");
-          //       waveform.seekTo(0);
-          //       setClickId(el.id);
-          //       setSelectedAudioId(previousAudio.id);
-          //       onPlay(previousAudio);
-          //     }
-          //   }
-          //   break;
-          // case "ArrowDown":
-          //   if (isPlaying && el.id === currentPlaying) {
-          //     const currentIndex = yourAudioArray.findIndex(
-          //       (audio) => audio.id === el.id
-          //     );
-          //     if (currentIndex < yourAudioArray.length - 1) {
-          //       const nextAudio = yourAudioArray[currentIndex + 1];
-          //       setProcess("0:00");
-          //       waveform.seekTo(0);
-          //       setClickId(el.id);
-          //       setSelectedAudioId(nextAudio.id);
-          //       onPlay(nextAudio);
-          //     }
-          //   }
-          //   break;
+          case "ArrowUp":
+            if (isPlaying && el.id === currentPlaying) {
+              handlePreviousAudio();
+            }
+            break;
+          case "ArrowDown":
+            if (isPlaying && el.id === currentPlaying) {
+              handleNextAudio();
+            }
+            break;
 
           default:
             break;

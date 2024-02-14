@@ -10,6 +10,8 @@ const Footer = () => {
   const { logoList } = useSelector((state) => state.logo);
   const { phoneInsta } = useSelector((state) => state.phoneInsta);
 
+  const goToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
     <footer
       className={`${styles.footer} ${
@@ -18,7 +20,7 @@ const Footer = () => {
     >
       <div className="container">
         <div className={styles.footer__top}>
-          <Link className={styles.footer__link} to="">
+          <Link className={styles.footer__link} onClick={goToTop} to="">
             {logoList?.map((el) => {
               return (
                 <img
