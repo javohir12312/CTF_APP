@@ -28,7 +28,7 @@ const Footer = () => {
                   className={styles.footer__logo}
                   width={50}
                   height={50}
-                  src={`${Forimage}${el.light}`}
+                  src={`${Forimage}${el.dark}`}
                 />
               );
             })}

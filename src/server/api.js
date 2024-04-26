@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://audio-video-mfh5d.ondigitalocean.app";
-const Forimage = "https://audio-video-mfh5d.ondigitalocean.app";
+axios.defaults.baseURL = "https://seal-app-s32dn.ondigitalocean.app";
+const Forimage = "https://seal-app-s32dn.ondigitalocean.app";
 
 export { axios, Forimage };

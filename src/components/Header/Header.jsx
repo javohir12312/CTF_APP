@@ -169,7 +169,7 @@ const Header = React.memo(() => {
                       className={styles.header__image}
                       width={50}
                       height={50}
-                      src={`${Forimage}${themeList ? el.dark : el.light}`}
+                      src={`${Forimage}${el.dark }`}
                       alt="site logo"
                     />
                   </Link>
