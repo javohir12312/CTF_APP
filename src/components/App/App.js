@@ -8,7 +8,7 @@ import Voices from "../Voices/Voices";
 import Category from "../Category/Category";
 import About from "../About/About";
 
-const App = () => {
+const App = () => { 
   FullGet();
   return (
     <Routes>
